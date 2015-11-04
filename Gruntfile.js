@@ -480,7 +480,7 @@ module.exports = function (grunt) {
 
   ]);
 
-  grunt.registerTask('dupa', [
+  grunt.registerTask('start', [
     'express',
     'watch'
   ]);
