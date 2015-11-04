@@ -27,7 +27,10 @@ function getDate() {
 
 function readTemp(id) {
   ds18b20.temperature(id, function (err, value) {
-    console.log(getDate() + ' ' + id + ': ', value);
+    if (err) {
+      return console.error(err);
+    }
+    sensors[id]=value;
   });
 }
 
