@@ -32,4 +32,3 @@ node_modules
 build.gradle
 deploy.gradle
 deploy.sh
-bower_components
