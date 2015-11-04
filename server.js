@@ -3,12 +3,15 @@ var app = express();
 var bodyParser = require('body-parser');
 
 var HEATER={enabled:true};
-var REGULATOR={enabled: true, temperature:22.7, deviation:0.7};
-var SENSORS = [{dummy: 20}];
+var REGULATOR={enabled: true, temperature:22.7, deviation:0.2};
+var SENSORS = [{id:'dummy', value: 20}];
+var temperature = require('./temperature');
 
-app.use(express.static(__dirname + '/dist'));
-//app.use(express.static(__dirname + '/app'));
-//app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+
+
+//app.use(express.static(__dirname + '/dist'));
+app.use(express.static(__dirname + '/app'));
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.use(bodyParser.json());
 
 function random(n) {

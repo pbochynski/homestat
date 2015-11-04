@@ -6,24 +6,23 @@
       <h3 class="panel-title">Control Panel</h3>
     </div>
     <div class="panel-body">
-      <input bs-switch ng-model="heater.enabled" type="checkbox" switch-label="heater" ng-change="onHeater()">
       <input bs-switch ng-model="regulator.enabled" type="checkbox" switch-label="regulator" ng-change="onRegulator()">
       <button type="button" class="btn btn-success" ng-click="reload()"><span class="glyphicon glyphicon-refresh"></span></button>
     </div>
-  </div>
-
-  <div class="panel panel-default" ng-show="regulator.enabled">
-    <div class="panel-heading">
-      <h3 class="panel-title">Regulator</h3>
+    <div class="panel-body" ng-hide="regulator.enabled">
+      <input bs-switch ng-model="heater.enabled" type="checkbox" switch-label="heater" ng-change="onHeater()">
     </div>
-    <div class="panel-body">
+
+    <div class="panel-body" ng-show="regulator.enabled">
       <div class="input-group">
-        <input ng-model="regulator.temperature" type="number" min="15" max="25" step="0.1" class="form-control" placeholder="temperature"
+        <input ng-model="regulator.temperature" type="number" min="15" max="25" step="0.1" class="form-control"
+               placeholder="temperature"
                aria-describedby="basic-addon1" title="Set desired temperature in the living room">
         <span class="input-group-addon" id="basic-addon1">&deg;C</span>
       </div>
       <div class="input-group">
-        <input ng-model="regulator.deviation" type="number" min="0" max="5" step="0.1" class="form-control" placeholder="deviation"
+        <input ng-model="regulator.deviation" type="number" min="0" max="5" step="0.1" class="form-control"
+               placeholder="deviation"
                aria-describedby="basic-addon2" title="Set deviation">
         <span class="input-group-addon" id="basic-addon2">&deg;C</span>
       </div>
@@ -39,7 +38,9 @@
       <tr ng-repeat="sensor in sensors">
         <td>{{sensor.id}}</td>
 
-        <td><span id="medium" class="label label-{{(sensor.value<regulator.temperature-regulator.deviation) ? 'info': (sensor.value>regulator.temperature+regulator.deviation) ? 'danger':'warning'}}">{{sensor.value}}</span></td>
+        <td><span id="medium"
+                  class="label label-{{(sensor.value<regulator.temperature-regulator.deviation) ? 'info': (sensor.value>regulator.temperature+regulator.deviation) ? 'danger':'warning'}}">{{sensor.value}}</span>
+        </td>
       </tr>
     </table>
   </div>

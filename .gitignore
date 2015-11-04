@@ -28,8 +28,8 @@ node_modules
 /dist
 /.tmp
 /.sass-cache
-/bower_components
 .idea
 build.gradle
 deploy.gradle
 deploy.sh
+bower_components
