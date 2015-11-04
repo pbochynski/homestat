@@ -3,8 +3,11 @@ var RADIATOR = '28-031467bacdff';
 var ROOM = '28-0115621a55ff';
 var heat = require('./heat');
 var request = require('request');
-var sensors = {ROOM:22.7, RADIATOR:47.2};
 var host = 'http://localhost:3000';
+
+var sensors = {};
+sensors[ROOM] = 22.7;
+sensors[RADIATOR] = 44.3;
 
 ds18b20.sensors(function (err, ids) {
   if (err) {
@@ -30,12 +33,12 @@ function readTemp(id) {
     if (err) {
       return console.error(err);
     }
-    sensors[id]=value;
+    sensors[id] = value;
   });
 }
 
 function regulator() {
-  request.get(host+'/stat', {}, function (err, resp, body) {
+  request.get(host + '/stat', {}, function (err, resp, body) {
     if (err) return;
     var stat = JSON.parse(body);
     if (stat.regulator.enabled) {
@@ -64,7 +67,7 @@ function sendSensors() {
       array.push({id: key, value: sensors[key]});
     }
   }
-  request.post(host+'/sensors', {json: array}, function (err, resp) {
+  request.post(host + '/sensors', {json: array}, function (err, resp) {
     if (err) {
       return console.error(err);
     }
